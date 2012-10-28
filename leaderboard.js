@@ -18,13 +18,12 @@ if (Meteor.isClient) {
     },
 
     'click a.edit': function (event) {
-      console.log(this)
       var player = $(event.target).closest(".player")
       player.find(".status").hide()
       player.find(".edit_status").show()
     },
 
-    'click a.done': function () {
+    'click a.done': function (event) {
       var player = $(event.target).closest(".player")
       Players.update(this._id, {$set: {status: player.find(".new_status").val()}});
       
@@ -32,7 +31,7 @@ if (Meteor.isClient) {
       player.find(".edit_status").hide()
     },
 
-    'click a.cancel': function () {
+    'click a.cancel': function (event) {
       var player = $(event.target).closest(".player")
       player.find(".new_status").val(Players.findOne(this._id).status)
       player.find(".status").show()
