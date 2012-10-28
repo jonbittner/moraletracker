@@ -44,14 +44,13 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     if (Players.find().count() === 0) {
-      var names = ["Ada Lovelace",
-                   "Grace Hopper",
-                   "Marie Curie",
-                   "Carl Friedrich Gauss",
-                   "Nikola Tesla",
-                   "Claude Shannon"];
-      for (var i = 0; i < names.length; i++)
-        Players.insert({name: names[i], score: Math.floor(Math.random())*5});
+	Players.insert({name: "Jon", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});
+	Players.insert({name: "Ryan", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});
+	Players.insert({name: "Marshall", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});    
+	Players.insert({name: "Nellie", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});    
+	Players.insert({name: "Caleb", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});    
+	Players.insert({name: "Kyle", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});    
+	Players.insert({name: "Mark", avatar: "http://gravatar.com/HASH/25e18cffe259859098f45d213b2f6db4",});    
     }
   });
 }
