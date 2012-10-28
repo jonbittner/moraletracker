@@ -3,6 +3,7 @@
 </head>
 
 <body>
+
   <div id="outer">
     {{> leaderboard}}
   </div>
@@ -18,6 +19,7 @@
 
 <template name="player">
   <div class="player {{selected}}">
+    <span class="avatar"><img src="{{avatar}}"></span>
     <span class="name">{{name}}</span>
     <span class="score">{{score}}</span>
     <input type="button" class="inc" value="+1" />
@@ -32,6 +34,8 @@
       <a class='done' href='#'>done</a>
       <a class='cancel' href='#'>cancel</a>
     </span>
+    <br>
+    <br>
   </div>
 </template>
 
