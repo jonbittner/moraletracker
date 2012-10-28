@@ -3,6 +3,7 @@
 </head>
 
 <body>
+
   <div id="outer">
     {{> leaderboard}}
   </div>
@@ -29,8 +30,10 @@
 
 <template name="player">
   <div class="player {{selected}}">
+    <span class="avatar"><img src="{{avatar}}"></span>
     <span class="name">{{name}}</span>
-    <span class="score">{{score}}</span>
+    <span class="score">{{score}}</span><br>
+     <span class="message">{{status}}Lorem ipsum and all that jazz.</span><br><br>
   </div>
 </template>
 
