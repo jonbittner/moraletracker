@@ -14,23 +14,24 @@
       {{> player}}
     {{/each}}
   </div>
-
-  {{#if selected_name}}
-  <div class="details">
-    <div class="name">{{selected_name}}</div>
-    <input type="button" class="inc" value="Give 5 points" />
-  </div>
-  {{/if}}
-
-  {{#unless selected_name}}
-  <div class="none">Click a player to select</div>
-  {{/unless}}
 </template>
 
 <template name="player">
   <div class="player {{selected}}">
     <span class="name">{{name}}</span>
     <span class="score">{{score}}</span>
+    <input type="button" class="inc" value="+1" />
+    <input type="button" class="dec" value="-1" />
+    <br>
+    <span class="status">
+      {{status}}
+      <a class='edit' href='#'>edit</a>
+    </span>
+    <span class='edit_status' style='display:none;'>
+      <input type="text" class='new_status' value="{{status}}"/>
+      <a class='done' href='#'>done</a>
+      <a class='cancel' href='#'>cancel</a>
+    </span>
   </div>
 </template>
 

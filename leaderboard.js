@@ -8,24 +8,35 @@ if (Meteor.isClient) {
     return Players.find({}, {sort: {score: -1, name: 1}});
   };
 
-  Template.leaderboard.selected_name = function () {
-    var player = Players.findOne(Session.get("selected_player"));
-    return player && player.name;
-  };
-
-  Template.player.selected = function () {
-    return Session.equals("selected_player", this._id) ? "selected" : '';
-  };
-
-  Template.leaderboard.events({
-    'click input.inc': function () {
-      Players.update(Session.get("selected_player"), {$inc: {score: 5}});
-    }
-  });
-
   Template.player.events({
-    'click': function () {
-      Session.set("selected_player", this._id);
+    'click .inc': function () {
+      Players.update(this._id, {$inc: {score: 1}});
+    },
+
+    'click .dec': function () {
+      Players.update(this._id, {$inc: {score: -1}});
+    },
+
+    'click a.edit': function (event) {
+      console.log(this)
+      var player = $(event.target).closest(".player")
+      player.find(".status").hide()
+      player.find(".edit_status").show()
+    },
+
+    'click a.done': function () {
+      var player = $(event.target).closest(".player")
+      Players.update(this._id, {$set: {status: player.find(".new_status").val()}});
+      
+      player.find(".status").show()
+      player.find(".edit_status").hide()
+    },
+
+    'click a.cancel': function () {
+      var player = $(event.target).closest(".player")
+      player.find(".new_status").val(Players.findOne(this._id).status)
+      player.find(".status").show()
+      player.find(".edit_status").hide()
     }
   });
 }
@@ -41,7 +52,7 @@ if (Meteor.isServer) {
                    "Nikola Tesla",
                    "Claude Shannon"];
       for (var i = 0; i < names.length; i++)
-        Players.insert({name: names[i], score: Math.floor(Math.random()*10)*5});
+        Players.insert({name: names[i], score: Math.floor(Math.random())*5});
     }
   });
 }
