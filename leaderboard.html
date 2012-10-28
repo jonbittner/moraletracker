@@ -4,48 +4,50 @@
 
 <body>
 
+  <center>
+    <h2>Morale Tracker</h2>
+  </center>
   <div id="outer">
     {{> leaderboard}}
   </div>
 </body>
 
 <template name="leaderboard">
-  <div class="leaderboard">
+  <table class="leaderboard">
     {{#each players}}
       {{> player}}
     {{/each}}
-  </div>
+  </table>
 </template>
 
 <template name="player">
-  <div class="player {{selected}}">
-    <span class="avatar"><img src="{{avatar}}"></span>
-    <span class="name">{{name}}</span>
-    <span class="score">{{score}}</span>
-    <input type="button" class="inc" value="+1" />
-    <input type="button" class="dec" value="-1" />
-
-    <ul class="star-rating">
-      <li class="current-rating width-{{score}}"></li>
-      <li><a href="#" title="1 star out of 5" class="one-star">1</a></li>
-      <li><a href="#" title="2 stars out of 5" class="two-stars">2</a></li>
-      <li><a href="#" title="3 stars out of 5" class="three-stars">3</a></li>
-      <li><a href="#" title="4 stars out of 5" class="four-stars">4</a></li>
-      <li><a href="#" title="5 stars out of 5" class="five-stars">5</a></li>
-    </ul>
-
-    <br>
-    <span class="status">
-      {{status}}
-      <a class='edit' href='#'>edit</a>
-    </span>
-    <span class='edit_status' style='display:none;'>
-      <input type="text" class='new_status' value="{{status}}"/>
-      <a class='done' href='#'>done</a>
-      <a class='cancel' href='#'>cancel</a>
-    </span>
-    <br>
-    <br>
-  </div>
+  <tr class="player {{selected}}">
+    <td class="avatar"><img src="{{avatar}}"></td>
+    <td>
+      <span class="name">{{name}}</span>
+      <br>
+      <span class="status">
+        {{status}}
+        {{#unless status}}
+          <em>no status</em>
+        {{/unless}}
+      </span>
+      <span class='edit_status' style='display:none;'>
+        <input type="text" class='new_status' value="{{status}}"/>
+        <a class='done' href='#'>done</a>
+        <a class='cancel' href='#'>cancel</a>
+      </span>
+    </td>
+    <td>
+      <ul class="star-rating">
+        <li class="current-rating width-{{score}}"></li>
+        <li><a href="#" title="1 star out of 5" class="one-star">1</a></li>
+        <li><a href="#" title="2 stars out of 5" class="two-stars">2</a></li>
+        <li><a href="#" title="3 stars out of 5" class="three-stars">3</a></li>
+        <li><a href="#" title="4 stars out of 5" class="four-stars">4</a></li>
+        <li><a href="#" title="5 stars out of 5" class="five-stars">5</a></li>
+      </ul>
+    </td>
+  </tr>
 </template>
 
