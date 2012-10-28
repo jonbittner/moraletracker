@@ -14,6 +14,12 @@ if (Meteor.isClient) {
     elem.find(".edit_status").hide()
   }
 
+  Template.player.cancel = function(id, elem) {
+    elem.find(".new_status").val(Players.findOne(id).status)
+    elem.find(".status").show()
+    elem.find(".edit_status").hide()
+  }
+
   Template.player.events({
     'click .one-star': function () {
       Players.update(this._id, {$set: {score: 1}});
@@ -53,26 +59,15 @@ if (Meteor.isClient) {
 
       elem.find(".new_status").keydown( function(e) {
         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-        if(key == 13) {
+        if(key == 13)
           Template.player.done(id, elem);
-        }
+        else if(key == 27)
+          Template.player.cancel(id, elem);
       })
 
       elem.find(".new_status").focusout( function() {
         Template.player.done(id, elem);
       })
-    },
-
-    'click a.done': function (event) {
-      var elem = $(event.target).closest(".player")
-      Template.player.done(this._id, elem);
-    },
-
-    'click a.cancel': function (event) {
-      var player = $(event.target).closest(".player")
-      player.find(".new_status").val(Players.findOne(this._id).status)
-      player.find(".status").show()
-      player.find(".edit_status").hide()
     }
   });
 }
